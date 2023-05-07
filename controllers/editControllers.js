@@ -1,6 +1,6 @@
 
 const jsonfile = require('jsonfile')
-const file = './codestack/React-Testing/src/data.json'
+const file = './codestack/Client/src/asserts/content/content.json'
 const Fs = require('fs')  
 const { checkRepo } = require('../services/chickRepo')
 

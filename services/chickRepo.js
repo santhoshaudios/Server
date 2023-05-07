@@ -12,11 +12,12 @@ async function exists (path) {
   }
 }
 module.exports.checkRepo = async ()=> {
-    console.log(await exists(  path.join(__dirname,'codestack','React-Testing')));
-    if(! await exists(path.join(__dirname,'codestack','React-Testing'))){
+  console.log(path.join('./','codestack','Client'));
+    console.log(await exists(  path.join("./",'codestack','Client')));
+    if(! await exists(path.join('./','codestack','Client'))){
         // console.log('hi'+);
         new simpleGit(path.join('./codestack'))
-        .clone(`https://itsmanibharathi:${process.env.gitTOKEN}@github.com/itsmanibharathi/React-Testing`)
+        .clone(`https://itsmanibharathi:${process.env.gitTOKEN}@${process.env.githubID}`)
         console.log(process.env.gitTOKEN);
     }
 

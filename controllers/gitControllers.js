@@ -21,7 +21,7 @@ module.exports.pushRepo = async (req,res)=>{
     await checkRepo()
     const val=req.body.msg || "force101";
     try {
-        await new simpleGit('./codestack/React-Testing/')
+        await new simpleGit('./codestack/Client/')
         .outputHandler((command, stdout, stderr) => {
           stdout.pipe(process.stdout);
           stderr.pipe(process.stderr)
@@ -34,7 +34,7 @@ module.exports.pushRepo = async (req,res)=>{
         .addConfig('user.email', 'manibharathidct@gmail.com')
         .add('.')
         .commit(val, '.')
-        await new simpleGit('./codestack/React-Testing/')
+        await new simpleGit('./codestack/Client/')
         .push('origin','main')
     } catch (error) {
         res.json({"status":false ,"message":error})    
