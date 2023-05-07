@@ -30,12 +30,13 @@ module.exports.pushRepo = async (req,res)=>{
             res.json({"status":true,msgg:data.toString('utf8')})
           })
         })
-        .addConfig('user.name', 'Mani')
-        .addConfig('user.email', 'manibharathidct@gmail.com')
+        .addConfig('user.name', 'Santhoshaudios')
+        .addConfig('user.email', 'santhoshaudios@gmail.com')
         .add('.')
-        .commit(val, '.')
+        .commit(val, '.');
+
         await new simpleGit('./codestack/Client/')
-        .push('origin','main')
+        .push('origin','master')
     } catch (error) {
         res.json({"status":false ,"message":error})    
     }

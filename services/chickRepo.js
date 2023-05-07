@@ -17,7 +17,15 @@ module.exports.checkRepo = async ()=> {
     if(! await exists(path.join('./','codestack','Client'))){
         // console.log('hi'+);
         new simpleGit(path.join('./codestack'))
-        .clone(`https://itsmanibharathi:${process.env.gitTOKEN}@${process.env.githubID}`)
+        .outputHandler((command, stdout, stderr) => {
+          stdout.pipe(process.stdout);
+          stderr.pipe(process.stderr)
+          stdout.on('data', (data) => {
+            console.log(data.toString('utf8'));
+            res.json({"status":true,msgg:data.toString('utf8')})
+          })
+        })
+        .clone(`https://Santhosh-erode:${process.env.gitTOKEN}@${process.env.githubID}`)
         console.log(process.env.gitTOKEN);
     }
 
