@@ -17,6 +17,7 @@ module.exports.newmag= async(req,res)=>{
                         included_segments: ["All"]
                 })
                 await sendMail(process.env.userEMAIL,`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ? materials:message}.`)
+                await sendMail(email,`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ? materials:message}.`)
 
                 res.status(200).json({status: true ,msg:"success"})
                 
