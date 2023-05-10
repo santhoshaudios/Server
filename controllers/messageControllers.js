@@ -1,6 +1,11 @@
 const Messages = require("../model/messageModel");
 const { sendMail } = require("../services/sendMail");
 const { sendNotification } = require("../services/sendNotification");
+function formatedata(data) {
+    var a= data.filter(e=>e.check==true);
+    console.log("data",a.forEach((k)=>k.title))
+    return `<ul>${ a.forEach((k)=>`<li key=${k.id}>${k.title}</li>`)} </ul>`
+}
 
 
 module.exports.newmag= async(req,res)=>{
@@ -9,6 +14,7 @@ module.exports.newmag= async(req,res)=>{
     if(email && name && phonenumber ){
         const newmag =await Messages.create({email,name,phonenumber,message,isquotation,materials})
         if(newmag){
+        
             try {
                 await sendNotification({
                         app_id: "b78e338f-2dc8-4ded-b596-91ca8729b0f2",
@@ -16,9 +22,9 @@ module.exports.newmag= async(req,res)=>{
                         heading:{"en":"Stranger"},
                         included_segments: ["All"]
                 })
-                await sendMail(process.env.userEMAIL,`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ? materials:message}.`)
-                await sendMail(email,`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ? materials:message}.`)
-
+                await sendMail("santhoshaudios@gmail.com",`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ? formatedata(materials):message}.`)
+                await sendMail(email,`New ${isquotation ? "Quotation":"Message"} arrival from ${name} `,` <br><br> Custermer Name : ${name} <br>  Custermer Phonenumber : ${phonenumber} <br> <br>${isquotation ?  formatedata(materials):message}.`)
+                console.log(materials);
                 res.status(200).json({status: true ,msg:"success"})
                 
             } catch (error) {
