@@ -1,5 +1,5 @@
 const jsonfile = require('jsonfile')
-const file = './codestack/count.json'
+const file = './codestack/Client/src/asserts/content/count.json'
 const fs = require('fs')  
 
 

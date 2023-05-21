@@ -27,7 +27,6 @@ module.exports.pushRepo = async (req,res)=>{
           stderr.pipe(process.stderr)
           stdout.on('data', (data) => {
             console.log(data.toString('utf8'));
-            res.json({"status":true,msgg:data.toString('utf8')})
           })
         })
         .addConfig('user.name', 'Santhoshaudios')
@@ -37,6 +36,7 @@ module.exports.pushRepo = async (req,res)=>{
 
         await new simpleGit('./codestack/Client/')
         .push('origin','master')
+        res.json({"status":true})
     } catch (error) {
         res.json({"status":false ,"message":error})    
     }
