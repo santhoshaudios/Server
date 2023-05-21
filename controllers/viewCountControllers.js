@@ -24,7 +24,17 @@ module.exports.increment = async (req,res)=>{
 }
 
 module.exports.retrieveCount= async(req,res)=>{
-    const json=fs.readFileSync(file,'utf-8');
-    console.log("object");
+    const json=await fs.readFileSync(file,'utf-8');
     res.status(200).json({status: true,json})
 }
+
+module.exports.updateCount= async(req,res)=>{
+    const json=await fs.readFileSync(file,'utf-8');
+    const obj = JSON.parse(json);
+    obj.pageviews = req.body.pageviews;
+    obj.visits = req.body.visits;
+    const newJSON = JSON.stringify(obj);
+    fs.writeFileSync(file, newJSON);
+    res.status(200).json({status: true})
+}
+
