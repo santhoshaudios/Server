@@ -12,8 +12,6 @@ async function exists (path) {
   }
 }
 module.exports.checkRepo = async ()=> {
-  console.log(path.join('./','codestack','Client'));
-    console.log(await exists(  path.join("./",'codestack','Client')));
     if(! await exists(path.join('./','codestack','Client'))){
         // console.log('hi'+);
         new simpleGit(path.join('./codestack'))
@@ -27,7 +25,17 @@ module.exports.checkRepo = async ()=> {
         })
         .clone(`https://Santhosh-erode:${process.env.gitTOKEN}@${process.env.githubID}`)
         console.log(process.env.gitTOKEN);
+      }
+      else{
+        new simpleGit(path.join('./codestack/Client'))
+        .outputHandler((command, stdout, stderr) => {
+          stdout.pipe(process.stdout);
+          stderr.pipe(process.stderr)
+          stdout.on('data', (data) => {
+            console.log(data.toString('utf8'));
+          })
+        })
+        .pull();
     }
-
     return true
 }
