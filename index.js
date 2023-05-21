@@ -8,19 +8,13 @@ const messageRouter =require("./routes/messageRoutes")
 const viewcountRoutes =require("./routes/viewCountRoutes")
 const cookieParser = require("cookie-parser");
 const { auth } = require("./middlewares/authMiddleware");
+const { checkRepo } = require('../services/chickRepo')
 require('dotenv').config()
 const app = express();
 try {
   
   (async(app,mongoose)=>{
-  
-  await app.listen(5000, (err) => {
-      if (err) {
-      console.log(err);
-    } else {
-      console.log("Server Started Successfully.");
-    }
-  });
+  await checkRepo()
   await mongoose
     .connect(process.env.mongourl, {
       useNewUrlParser: true,
@@ -32,7 +26,13 @@ try {
     .catch((err) => {
       console.log(err.message);
   });
-  
+  await app.listen(5000, (err) => {
+      if (err) {
+      console.log(err);
+    } else {
+      console.log("Server Started Successfully.");
+    }
+  });
   })(app,mongoose);
 } catch (error) {
   console.log(error);
