@@ -8,7 +8,7 @@ const messageRouter =require("./routes/messageRoutes")
 const viewcountRoutes =require("./routes/viewCountRoutes")
 const cookieParser = require("cookie-parser");
 const { auth } = require("./middlewares/authMiddleware");
-const { checkRepo } = require('../services/chickRepo')
+const { checkRepo } = require('./services/chickRepo')
 require('dotenv').config()
 const app = express();
 try {
