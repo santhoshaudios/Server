@@ -21,5 +21,10 @@ module.exports.increment = async (req,res)=>{
     fs.writeFileSync(file, newJSON);
     res.send(newJSON);
     // Writes result to file and sends to user as JSON
+}
 
+module.exports.retrieveCount= async(req,res)=>{
+    const json=fs.readFileSync(file,'utf-8');
+    console.log("object");
+    res.status(200).json({status: true,json})
 }
